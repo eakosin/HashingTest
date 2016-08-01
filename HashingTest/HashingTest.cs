@@ -22,9 +22,10 @@ namespace HashTest
 			// Get scrypt parameters
 			long cost = (long)scryptCostValue.Value;
 			long blockSize = (long)scryptBlockSizeValue.Value;
+			long parallel = (long)scryptParallelValue.Value;
 
-			// Calculate scrypt memory usage: 128 * N * r
-			long memoryUsageBytes = (128 * cost * blockSize);
+			// Calculate scrypt memory usage: 128 * N * r * p
+			long memoryUsageBytes = (128 * cost * blockSize * parallel);
 			string memoryUsageString;
 
 			// Make the value pretty.

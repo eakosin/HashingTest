@@ -370,6 +370,7 @@
             0,
             0,
             0});
+			this.scryptParallelValue.ValueChanged += new System.EventHandler(this.scryptUpdateStatistics);
 			// 
 			// scryptDerivedKeyLengthValue
 			// 
