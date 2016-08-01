@@ -86,6 +86,7 @@ namespace HashTest
 		private void DoTheHashing()
 		{
 			// Disable and clear UI elements
+			StartButton.Text = "Cancel";
 			PasswordSaltLayoutTable.Enabled = false;
 			scryptConfigurationContainer.Enabled = false;
 			bcryptConfigurationContainer.Enabled = false;
