@@ -46,9 +46,14 @@
 			this.scryptMemoryCostTextbox = new System.Windows.Forms.TextBox();
 			this.scryptBufferMixCoverageLabel = new System.Windows.Forms.Label();
 			this.scryptBufferMixCoverageTextbox = new System.Windows.Forms.TextBox();
+			this.scryptCostValue = new System.Windows.Forms.NumericUpDown();
+			this.scryptBlockSizeValue = new System.Windows.Forms.NumericUpDown();
+			this.scryptParallelValue = new System.Windows.Forms.NumericUpDown();
+			this.scryptDerivedKeyLengthValue = new System.Windows.Forms.NumericUpDown();
 			this.bcryptConfigurationContainer = new System.Windows.Forms.GroupBox();
 			this.bcryptConfigurationLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.bcryptRoundsLabel = new System.Windows.Forms.Label();
+			this.bcryptRoundsValue = new System.Windows.Forms.NumericUpDown();
 			this.HashingProcessLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.OptionStartLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.bcryptOption = new System.Windows.Forms.RadioButton();
@@ -58,26 +63,21 @@
 			this.StatisticsLayout = new System.Windows.Forms.TableLayoutPanel();
 			this.HashingTimeLabel = new System.Windows.Forms.Label();
 			this.HashingTimeTextbox = new System.Windows.Forms.TextBox();
-			this.scryptCostValue = new System.Windows.Forms.NumericUpDown();
-			this.scryptBlockSizeValue = new System.Windows.Forms.NumericUpDown();
-			this.scryptParallelValue = new System.Windows.Forms.NumericUpDown();
-			this.scryptDerivedKeyLengthValue = new System.Windows.Forms.NumericUpDown();
-			this.bcryptRoundsValue = new System.Windows.Forms.NumericUpDown();
 			this.PasswordSaltLayoutTable.SuspendLayout();
 			this.FormLayoutTable.SuspendLayout();
 			this.HashingOptions.SuspendLayout();
 			this.scryptConfigurationContainer.SuspendLayout();
 			this.scryptConfigurationLayout.SuspendLayout();
-			this.bcryptConfigurationContainer.SuspendLayout();
-			this.bcryptConfigurationLayout.SuspendLayout();
-			this.HashingProcessLayout.SuspendLayout();
-			this.OptionStartLayout.SuspendLayout();
-			this.StatisticsLayout.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.scryptCostValue)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.scryptBlockSizeValue)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.scryptParallelValue)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.scryptDerivedKeyLengthValue)).BeginInit();
+			this.bcryptConfigurationContainer.SuspendLayout();
+			this.bcryptConfigurationLayout.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bcryptRoundsValue)).BeginInit();
+			this.HashingProcessLayout.SuspendLayout();
+			this.OptionStartLayout.SuspendLayout();
+			this.StatisticsLayout.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PasswordSaltLayoutTable
@@ -300,6 +300,100 @@
 			this.scryptBufferMixCoverageTextbox.Size = new System.Drawing.Size(181, 20);
 			this.scryptBufferMixCoverageTextbox.TabIndex = 11;
 			// 
+			// scryptCostValue
+			// 
+			this.scryptCostValue.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scryptCostValue.Location = new System.Drawing.Point(112, 3);
+			this.scryptCostValue.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+			this.scryptCostValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.scryptCostValue.Name = "scryptCostValue";
+			this.scryptCostValue.Size = new System.Drawing.Size(181, 20);
+			this.scryptCostValue.TabIndex = 12;
+			this.scryptCostValue.Value = new decimal(new int[] {
+            16384,
+            0,
+            0,
+            0});
+			this.scryptCostValue.ValueChanged += new System.EventHandler(this.scryptUpdateStatistics);
+			// 
+			// scryptBlockSizeValue
+			// 
+			this.scryptBlockSizeValue.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scryptBlockSizeValue.Location = new System.Drawing.Point(112, 29);
+			this.scryptBlockSizeValue.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+			this.scryptBlockSizeValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.scryptBlockSizeValue.Name = "scryptBlockSizeValue";
+			this.scryptBlockSizeValue.Size = new System.Drawing.Size(181, 20);
+			this.scryptBlockSizeValue.TabIndex = 13;
+			this.scryptBlockSizeValue.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+			this.scryptBlockSizeValue.ValueChanged += new System.EventHandler(this.scryptUpdateStatistics);
+			// 
+			// scryptParallelValue
+			// 
+			this.scryptParallelValue.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scryptParallelValue.Location = new System.Drawing.Point(112, 55);
+			this.scryptParallelValue.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+			this.scryptParallelValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.scryptParallelValue.Name = "scryptParallelValue";
+			this.scryptParallelValue.Size = new System.Drawing.Size(181, 20);
+			this.scryptParallelValue.TabIndex = 14;
+			this.scryptParallelValue.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			// 
+			// scryptDerivedKeyLengthValue
+			// 
+			this.scryptDerivedKeyLengthValue.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.scryptDerivedKeyLengthValue.Location = new System.Drawing.Point(112, 81);
+			this.scryptDerivedKeyLengthValue.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+			this.scryptDerivedKeyLengthValue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.scryptDerivedKeyLengthValue.Name = "scryptDerivedKeyLengthValue";
+			this.scryptDerivedKeyLengthValue.Size = new System.Drawing.Size(181, 20);
+			this.scryptDerivedKeyLengthValue.TabIndex = 15;
+			this.scryptDerivedKeyLengthValue.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+			// 
 			// bcryptConfigurationContainer
 			// 
 			this.bcryptConfigurationContainer.Controls.Add(this.bcryptConfigurationLayout);
@@ -338,6 +432,29 @@
 			this.bcryptRoundsLabel.TabIndex = 0;
 			this.bcryptRoundsLabel.Text = "Rounds [2^n]";
 			this.bcryptRoundsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// bcryptRoundsValue
+			// 
+			this.bcryptRoundsValue.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.bcryptRoundsValue.Location = new System.Drawing.Point(80, 3);
+			this.bcryptRoundsValue.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+			this.bcryptRoundsValue.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.bcryptRoundsValue.Name = "bcryptRoundsValue";
+			this.bcryptRoundsValue.Size = new System.Drawing.Size(214, 20);
+			this.bcryptRoundsValue.TabIndex = 1;
+			this.bcryptRoundsValue.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			// 
 			// HashingProcessLayout
 			// 
@@ -457,123 +574,6 @@
 			this.HashingTimeTextbox.Size = new System.Drawing.Size(344, 20);
 			this.HashingTimeTextbox.TabIndex = 3;
 			// 
-			// scryptCostValue
-			// 
-			this.scryptCostValue.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.scryptCostValue.Location = new System.Drawing.Point(112, 3);
-			this.scryptCostValue.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-			this.scryptCostValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.scryptCostValue.Name = "scryptCostValue";
-			this.scryptCostValue.Size = new System.Drawing.Size(181, 20);
-			this.scryptCostValue.TabIndex = 12;
-			this.scryptCostValue.Value = new decimal(new int[] {
-            16384,
-            0,
-            0,
-            0});
-			this.scryptCostValue.ValueChanged += new System.EventHandler(this.scryptUpdateStatistics);
-			// 
-			// scryptBlockSizeValue
-			// 
-			this.scryptBlockSizeValue.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.scryptBlockSizeValue.Location = new System.Drawing.Point(112, 29);
-			this.scryptBlockSizeValue.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-			this.scryptBlockSizeValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.scryptBlockSizeValue.Name = "scryptBlockSizeValue";
-			this.scryptBlockSizeValue.Size = new System.Drawing.Size(181, 20);
-			this.scryptBlockSizeValue.TabIndex = 13;
-			this.scryptBlockSizeValue.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-			this.scryptBlockSizeValue.ValueChanged += new System.EventHandler(this.scryptUpdateStatistics);
-			// 
-			// scryptParallelValue
-			// 
-			this.scryptParallelValue.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.scryptParallelValue.Location = new System.Drawing.Point(112, 55);
-			this.scryptParallelValue.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-			this.scryptParallelValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.scryptParallelValue.Name = "scryptParallelValue";
-			this.scryptParallelValue.Size = new System.Drawing.Size(181, 20);
-			this.scryptParallelValue.TabIndex = 14;
-			this.scryptParallelValue.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			// 
-			// scryptDerivedKeyLengthValue
-			// 
-			this.scryptDerivedKeyLengthValue.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.scryptDerivedKeyLengthValue.Location = new System.Drawing.Point(112, 81);
-			this.scryptDerivedKeyLengthValue.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-			this.scryptDerivedKeyLengthValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.scryptDerivedKeyLengthValue.Name = "scryptDerivedKeyLengthValue";
-			this.scryptDerivedKeyLengthValue.Size = new System.Drawing.Size(181, 20);
-			this.scryptDerivedKeyLengthValue.TabIndex = 15;
-			this.scryptDerivedKeyLengthValue.Value = new decimal(new int[] {
-            128,
-            0,
-            0,
-            0});
-			// 
-			// bcryptRoundsValue
-			// 
-			this.bcryptRoundsValue.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.bcryptRoundsValue.Location = new System.Drawing.Point(80, 3);
-			this.bcryptRoundsValue.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-			this.bcryptRoundsValue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.bcryptRoundsValue.Name = "bcryptRoundsValue";
-			this.bcryptRoundsValue.Size = new System.Drawing.Size(214, 20);
-			this.bcryptRoundsValue.TabIndex = 1;
-			this.bcryptRoundsValue.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-			// 
 			// HashingTest
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -590,20 +590,20 @@
 			this.scryptConfigurationContainer.ResumeLayout(false);
 			this.scryptConfigurationLayout.ResumeLayout(false);
 			this.scryptConfigurationLayout.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.scryptCostValue)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.scryptBlockSizeValue)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.scryptParallelValue)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.scryptDerivedKeyLengthValue)).EndInit();
 			this.bcryptConfigurationContainer.ResumeLayout(false);
 			this.bcryptConfigurationLayout.ResumeLayout(false);
 			this.bcryptConfigurationLayout.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.bcryptRoundsValue)).EndInit();
 			this.HashingProcessLayout.ResumeLayout(false);
 			this.HashingProcessLayout.PerformLayout();
 			this.OptionStartLayout.ResumeLayout(false);
 			this.OptionStartLayout.PerformLayout();
 			this.StatisticsLayout.ResumeLayout(false);
 			this.StatisticsLayout.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.scryptCostValue)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.scryptBlockSizeValue)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.scryptParallelValue)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.scryptDerivedKeyLengthValue)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.bcryptRoundsValue)).EndInit();
 			this.ResumeLayout(false);
 
         }
