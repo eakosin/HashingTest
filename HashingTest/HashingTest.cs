@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -29,7 +30,11 @@ namespace HashTest
 			string memoryUsageString;
 
 			// Make the value pretty.
-			if (memoryUsageBytes >= 1073741824)
+			if ((Convert.ToString(cost, 2).Count(x => x == '1') != 1))
+			{
+				memoryUsageString = "Cost is not a power of 2.";
+			}
+			else if (memoryUsageBytes >= 1073741824)
 			{
 				memoryUsageString = ((double)memoryUsageBytes / 1073741824.0).ToString() + " GB";
 			}
@@ -86,6 +91,13 @@ namespace HashTest
 
 		private void DoTheHashing()
 		{
+			// Validate Parameters
+			if (scryptOption.Checked && (Convert.ToString((int)scryptCostValue.Value, 2).Count(x => x == '1') != 1))
+			{
+				HashResultTextbox.Text = "Error(scrypt): Cost is not a power of 2.";
+				return;
+			}
+
 			// Disable and clear UI elements
 			StartButton.Text = "Cancel";
 			PasswordSaltLayoutTable.Enabled = false;
@@ -120,7 +132,7 @@ namespace HashTest
 				HashingTimeTextbox.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
 				HashResultTextbox.Text = "SCRYPT:" + cost.ToString() + ":" + blockSize.ToString() + ":" + parallel.ToString() + ":" + Convert.ToBase64String(saltBytes) + ":" + Convert.ToBase64String(hashResultBytes);
 			}
-			else
+			else if (bcryptOption.Checked)
 			{
 				// Get bcrypt parameters
 				int rounds;
