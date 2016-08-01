@@ -1,0 +1,1 @@
+Simple utility to help choose parameters for scrypt or bcrypt.
