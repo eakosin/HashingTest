@@ -205,7 +205,7 @@
 			this.bcryptConfigurationContainer.Size = new System.Drawing.Size(580, 45);
 			this.bcryptConfigurationContainer.TabIndex = 1;
 			this.bcryptConfigurationContainer.TabStop = false;
-			this.bcryptConfigurationContainer.Text = "bcrypt";
+			this.bcryptConfigurationContainer.Text = "BCrypt";
 			// 
 			// bcryptConfigurationLayout
 			// 
@@ -239,8 +239,8 @@
 			this.bcryptRoundsValue.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.bcryptRoundsValue.Location = new System.Drawing.Point(80, 3);
 			this.bcryptRoundsValue.Maximum = new decimal(new int[] {
+            31,
             0,
-            1,
             0,
             0});
 			this.bcryptRoundsValue.Minimum = new decimal(new int[] {

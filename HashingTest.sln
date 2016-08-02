@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCryptNativeHashingTest", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCryptHashingTest", "BCryptHashingTest\BCryptHashingTest.csproj", "{AD98003B-B037-4A2D-8D05-0BCDADD0CB66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Argon2HashingTest", "Argon2HashingTest\Argon2HashingTest.csproj", "{10F0D048-930F-4BFC-A941-9EF7D11CA82E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD98003B-B037-4A2D-8D05-0BCDADD0CB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD98003B-B037-4A2D-8D05-0BCDADD0CB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD98003B-B037-4A2D-8D05-0BCDADD0CB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F0D048-930F-4BFC-A941-9EF7D11CA82E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F0D048-930F-4BFC-A941-9EF7D11CA82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F0D048-930F-4BFC-A941-9EF7D11CA82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F0D048-930F-4BFC-A941-9EF7D11CA82E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

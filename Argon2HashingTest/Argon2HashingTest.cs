@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Liphsoft.Crypto.Argon2;
 
 namespace HashTest
 {
-	public partial class BCryptHashingTest : Form
+	public partial class Argon2HashingTest : Form
 	{
 		private Thread hashingThread;
 
-		public BCryptHashingTest()
+		public Argon2HashingTest()
 		{
 			InitializeComponent();
 		}
@@ -35,7 +37,7 @@ namespace HashTest
 				// Reset UI elements
 				StartButton.Text = "Start";
 				PasswordSaltLayoutTable.Enabled = true;
-				bcryptConfigurationContainer.Enabled = true;
+				argon2ConfigurationContainer.Enabled = true;
 			}
 		}
 
@@ -44,27 +46,32 @@ namespace HashTest
 			// Disable and clear UI elements
 			StartButton.Text = "Cancel";
 			PasswordSaltLayoutTable.Enabled = false;
-			bcryptConfigurationContainer.Enabled = false;
+			argon2ConfigurationContainer.Enabled = false;
 			HashingTimeTextbox.Text = "";
 			HashResultTextbox.Text = "";
 
 			Stopwatch stopwatch = new Stopwatch();
 
-			// Get bcrypt parameters
-			int rounds;
-			rounds = (int)bcryptRoundsValue.Value;
+			// Get scrypt parameters
+			uint timeCost, memoryCost, parallelism, hashLength;
+			timeCost = (uint)argon2TimeCostValue.Value;
+			memoryCost = (uint)argon2MemoryCostValue.Value;
+			parallelism = (uint)argon2ParallelismValue.Value;
+			hashLength = (uint)argon2HashLengthValue.Value;
+
+			Argon2Type argon2TypeSetting = argon2Argon2iOption.Checked ? Argon2Type.Argon2i : Argon2Type.Argon2d;
 
 			string hashResult;
 
-			// Trim or pad salt to 22 bytes, base64 encode, and prefix parameters
-			string salt = (SaltTextBox.Text.Length > 22) ? SaltTextBox.Text.Substring(0, 22) : SaltTextBox.Text;
-			byte[] saltBytes = new byte[22];
-			Encoding.UTF8.GetBytes(salt).CopyTo(saltBytes, 0);
-			string prefixSalt = "$2a$" + rounds.ToString("00") + "$" + Convert.ToBase64String(saltBytes);
+			// Build UTF8 byte arrays from password and salt
+			byte[] passwordBytes = Encoding.UTF8.GetBytes(PasswordTextBox.Text);
+			byte[] saltBytes = Encoding.UTF8.GetBytes(SaltTextBox.Text);
+
+			var hasher = new PasswordHasher(timeCost, memoryCost, parallelism, argon2TypeSetting, hashLength);
 
 			// Do the hashing
 			stopwatch.Start();
-			hashResult = BCrypt.Net.BCrypt.HashPassword(PasswordTextBox.Text, prefixSalt);
+			hashResult = hasher.Hash(passwordBytes, saltBytes);
 			stopwatch.Stop();
 
 			// Display results
@@ -77,7 +84,7 @@ namespace HashTest
 			// Reset UI elements
 			StartButton.Text = "Start";
 			PasswordSaltLayoutTable.Enabled = true;
-			bcryptConfigurationContainer.Enabled = true;
+			argon2ConfigurationContainer.Enabled = true;
 		}
 
 	}

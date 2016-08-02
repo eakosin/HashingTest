@@ -218,7 +218,7 @@
 			this.scryptConfigurationContainer.Size = new System.Drawing.Size(580, 176);
 			this.scryptConfigurationContainer.TabIndex = 0;
 			this.scryptConfigurationContainer.TabStop = false;
-			this.scryptConfigurationContainer.Text = "scrypt";
+			this.scryptConfigurationContainer.Text = "SCrypt";
 			// 
 			// scryptConfigurationLayout
 			// 

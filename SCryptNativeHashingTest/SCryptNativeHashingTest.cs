@@ -93,7 +93,7 @@ namespace HashTest
 			// Validate Parameters
 			if (Convert.ToString((int)scryptCostValue.Value, 2).Count(x => x == '1') != 1)
 			{
-				HashResultTextbox.Text = "Error(scrypt): Cost is not a power of 2.";
+				HashResultTextbox.Text = "Error: Cost is not a power of 2.";
 				return;
 			}
 
