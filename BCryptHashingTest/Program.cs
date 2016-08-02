@@ -16,7 +16,7 @@ namespace HashTest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HashingTest());
+            Application.Run(new BCryptHashingTest());
         }
     }
 }

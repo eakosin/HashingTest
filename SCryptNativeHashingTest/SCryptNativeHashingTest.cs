@@ -1,4 +1,4 @@
-﻿using CryptSharp.Utility;
+﻿using Replicon.Cryptography.SCrypt;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace HashTest
 {
-	public partial class HashingTest : Form
+	public partial class SCryptNativeHashingTest : Form
 	{
 		private Thread hashingThread;
 
-		public HashingTest()
+		public SCryptNativeHashingTest()
 		{
 			InitializeComponent();
 			scryptUpdateStatistics(null, null);
@@ -85,14 +85,13 @@ namespace HashTest
 				StartButton.Text = "Start";
 				PasswordSaltLayoutTable.Enabled = true;
 				scryptConfigurationContainer.Enabled = true;
-				bcryptConfigurationContainer.Enabled = true;
 			}
 		}
 
 		private void DoTheHashing()
 		{
 			// Validate Parameters
-			if (scryptOption.Checked && (Convert.ToString((int)scryptCostValue.Value, 2).Count(x => x == '1') != 1))
+			if (Convert.ToString((int)scryptCostValue.Value, 2).Count(x => x == '1') != 1)
 			{
 				HashResultTextbox.Text = "Error(scrypt): Cost is not a power of 2.";
 				return;
@@ -102,59 +101,34 @@ namespace HashTest
 			StartButton.Text = "Cancel";
 			PasswordSaltLayoutTable.Enabled = false;
 			scryptConfigurationContainer.Enabled = false;
-			bcryptConfigurationContainer.Enabled = false;
 			HashingTimeTextbox.Text = "";
 			HashResultTextbox.Text = "";
 
 			Stopwatch stopwatch = new Stopwatch();
 
-			if (scryptOption.Checked)
-			{
-				// Get scrypt parameters
-				int cost, blockSize, parallel, derivedKeyLength;
-				cost = (int)scryptCostValue.Value;
-				blockSize = (int)scryptBlockSizeValue.Value;
-				parallel = (int)scryptParallelValue.Value;
-				derivedKeyLength = (int)scryptDerivedKeyLengthValue.Value;
+			// Get scrypt parameters
+			ulong cost;
+			uint blockSize, parallel, derivedKeyLength;
+			cost = (ulong)scryptCostValue.Value;
+			blockSize = (uint)scryptBlockSizeValue.Value;
+			parallel = (uint)scryptParallelValue.Value;
+			derivedKeyLength = (uint)scryptDerivedKeyLengthValue.Value;
 
-				byte[] hashResultBytes;
+			byte[] hashResultBytes;
 
-				// Build UTF8 byte arrays from password and salt
-				byte[] passwordBytes = Encoding.UTF8.GetBytes(PasswordTextBox.Text);
-				byte[] saltBytes = Encoding.UTF8.GetBytes(SaltTextBox.Text);
+			// Build UTF8 byte arrays from password and salt
+			byte[] passwordBytes = Encoding.UTF8.GetBytes(PasswordTextBox.Text);
+			byte[] saltBytes = Encoding.UTF8.GetBytes(SaltTextBox.Text);
 
-				// Do the hashing
-				stopwatch.Start();
-				hashResultBytes = SCrypt.ComputeDerivedKey(passwordBytes, saltBytes, cost, blockSize, parallel, null, derivedKeyLength);
-				stopwatch.Stop();
+			// Do the hashing
+			stopwatch.Start();
+			hashResultBytes = SCrypt.DeriveKey(passwordBytes, saltBytes, cost, blockSize, parallel, derivedKeyLength);
+			stopwatch.Stop();
 
-				// Display results
-				HashingTimeTextbox.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-				HashResultTextbox.Text = "SCRYPT:" + cost.ToString() + ":" + blockSize.ToString() + ":" + parallel.ToString() + ":" + Convert.ToBase64String(saltBytes) + ":" + Convert.ToBase64String(hashResultBytes);
-			}
-			else if (bcryptOption.Checked)
-			{
-				// Get bcrypt parameters
-				int rounds;
-				rounds = (int)bcryptRoundsValue.Value;
+			// Display results
+			HashingTimeTextbox.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+			HashResultTextbox.Text = "SCRYPT:" + cost.ToString() + ":" + blockSize.ToString() + ":" + parallel.ToString() + ":" + Convert.ToBase64String(saltBytes) + ":" + Convert.ToBase64String(hashResultBytes);
 
-				string hashResult;
-
-				// Trim or pad salt to 22 bytes, base64 encode, and prefix parameters
-				string salt = (SaltTextBox.Text.Length > 22) ? SaltTextBox.Text.Substring(0, 22) : SaltTextBox.Text;
-				byte[] saltBytes = new byte[22];
-				Encoding.UTF8.GetBytes(salt).CopyTo(saltBytes, 0);
-				string prefixSalt = "$2a$" + rounds.ToString("00") + "$" + Convert.ToBase64String(saltBytes);
-
-				// Do the hashing
-				stopwatch.Start();
-				hashResult = BCrypt.Net.BCrypt.HashPassword(PasswordTextBox.Text, prefixSalt);
-				stopwatch.Stop();
-
-				// Display results
-				HashingTimeTextbox.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
-				HashResultTextbox.Text = hashResult;
-			}
 			// Cleanup
 			GC.Collect();
 
@@ -162,7 +136,6 @@ namespace HashTest
 			StartButton.Text = "Start";
 			PasswordSaltLayoutTable.Enabled = true;
 			scryptConfigurationContainer.Enabled = true;
-			bcryptConfigurationContainer.Enabled = true;
 		}
 
 	}

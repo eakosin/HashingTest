@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B540C43C-1061-42A1-9391-0A00BEDD679C}</ProjectGuid>
+    <ProjectGuid>{AD98003B-B037-4A2D-8D05-0BCDADD0CB66}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HashingTest</RootNamespace>
-    <AssemblyName>HashingTest</AssemblyName>
+    <RootNamespace>BCryptHashingTest</RootNamespace>
+    <AssemblyName>BCryptHashingTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -37,10 +37,6 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
-      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CryptSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
       <Private>True</Private>
@@ -58,16 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HashingTest.cs">
+    <Compile Include="BCryptHashingTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HashingTest.Designer.cs">
-      <DependentUpon>HashingTest.cs</DependentUpon>
+    <Compile Include="BCryptHashingTest.Designer.cs">
+      <DependentUpon>BCryptHashingTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="HashingTest.resx">
-      <DependentUpon>HashingTest.cs</DependentUpon>
+    <EmbeddedResource Include="BCryptHashingTest.resx">
+      <DependentUpon>BCryptHashingTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <Content Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
