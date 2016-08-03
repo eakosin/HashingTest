@@ -63,15 +63,10 @@ namespace HashTest
 
 			string hashResult;
 
-			// Build UTF8 byte arrays from password and salt
-			byte[] passwordBytes = Encoding.UTF8.GetBytes(PasswordTextBox.Text);
-			byte[] saltBytes = Encoding.UTF8.GetBytes(SaltTextBox.Text);
-
 			var hasher = new PasswordHasher(timeCost, memoryCost, parallelism, argon2TypeSetting, hashLength);
-
 			// Do the hashing
 			stopwatch.Start();
-			hashResult = hasher.Hash(passwordBytes, saltBytes);
+			hashResult = hasher.Hash(PasswordTextBox.Text, SaltTextBox.Text);
 			stopwatch.Stop();
 
 			// Display results
